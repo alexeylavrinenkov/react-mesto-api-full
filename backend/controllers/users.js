@@ -12,7 +12,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => {
-      res.send({ data: users });
+      res.send(users);
     })
     .catch((err) => {
       next(err);
@@ -26,7 +26,7 @@ const getUser = (req, res, next) => {
         throw new NotFoundError('Пользователь не найден');
       }
 
-      res.send({ data: user });
+      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -99,7 +99,7 @@ const updateProfile = (req, res, next) => {
         throw new NotFoundError('Пользователь не найден');
       }
 
-      res.send({ data: user });
+      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -119,7 +119,7 @@ const updateAvatar = (req, res, next) => {
         throw new NotFoundError('Пользователь не найден');
       }
 
-      res.send({ data: user });
+      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {

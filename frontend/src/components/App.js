@@ -149,13 +149,13 @@ function App() {
   }
 
   function handleTokenCheck() {
-    if (localStorage.getItem('token')) {
-      const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
+    if (token) {
       checkToken(token)
-        .then((data) => {
-          if (data) {
-            setCurrentEmail(data.email);
+        .then((res) => {
+          if (res.data) {
+            setCurrentEmail(res.data.email);
             setLoggedIn(true);
             history.push('/');
           }
@@ -173,8 +173,8 @@ function App() {
   React.useEffect(() => {
     if (loggedIn) {
       api.getUserInfo()
-        .then((data) => {
-          setCurrentUser(data);
+        .then((res) => {
+          setCurrentUser(res.data);
         })
         .catch((err) => {
           console.log(`Ошибка: ${err.status}`);

@@ -100,7 +100,7 @@ const api = new Api({
   url: baseUrl,
   headers: {
     'Content-Type': 'application/json',
-    authorization: `Bearer ${localStorage.getItem('token')}`,
+    'Authorization': `Bearer ${localStorage.getItem('token')}`,
   }
 });
 

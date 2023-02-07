@@ -153,9 +153,9 @@ function App() {
       const token = localStorage.getItem('token');
 
       checkToken(token)
-        .then((res) => {
-          if (res.data) {
-            setCurrentEmail(res.data.email);
+        .then((data) => {
+          if (data) {
+            setCurrentEmail(data.email);
             setLoggedIn(true);
             history.push('/');
           }

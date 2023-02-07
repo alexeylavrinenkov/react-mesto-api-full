@@ -1,7 +1,7 @@
 import { baseUrl } from './constants';
 
 class Api {
-  constructor({ url, headers}) {
+  constructor({ url, headers }) {
     this._url = url;
     this._headers = headers;
   }
@@ -14,9 +14,18 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`)
   }
 
+  _getHeaders() {
+    const token = localStorage.getItem('token');
+
+    return {
+      'Authorization': `Bearer ${token}`,
+      ...this._headers,
+    };
+  }
+
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
-      headers: this._headers,
+      headers: this._getHeaders(),
     })
       .then((res) => {
         return this._checkResponse(res);
@@ -25,7 +34,7 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
-      headers: this._headers,
+      headers: this._getHeaders(),
     })
       .then((res) => {
         return this._checkResponse(res);
@@ -35,7 +44,7 @@ class Api {
   saveUserInfo(data) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: this._getHeaders(),
       body: JSON.stringify({
         name: `${data.name}`,
         about: `${data.about}`
@@ -49,7 +58,7 @@ class Api {
   saveAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: this._getHeaders(),
       body: JSON.stringify({
         avatar: `${data.avatar}`
       })
@@ -62,7 +71,7 @@ class Api {
   addNewCard(data) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: this._getHeaders(),
       body: JSON.stringify({
         name: `${data.title}`,
         link: `${data.link}`
@@ -76,9 +85,7 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: 'DELETE',
-      headers: {
-        authorization: this._token
-      }
+      headers: this._getHeaders(),
     })
       .then((res) => {
         return this._checkResponse(res);
@@ -88,7 +95,7 @@ class Api {
   changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: (isLiked) ? 'PUT' : 'DELETE',
-      headers: this.headers
+      headers: this._getHeaders(),
     })
       .then((res) => {
         return this._checkResponse(res);
@@ -100,7 +107,6 @@ const api = new Api({
   url: baseUrl,
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem('token')}`,
   }
 });
 

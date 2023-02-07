@@ -44,7 +44,7 @@ const getMe = (req, res, next) => {
         throw new NotFoundError('Пользователь не найден');
       }
 
-      return res.send({ data: user });
+      return res.send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

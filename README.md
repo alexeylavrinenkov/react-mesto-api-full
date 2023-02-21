@@ -1,12 +1,5 @@
 # ✈ Mesto (фронтенд и бэкенд)
 
-Ссылка на GitHub-репозиторий:  
-https://github.com/alexeylavrinenkov/react-mesto-api-full
-
-IP  51.250.89.223  
-Frontend  https://mesto.service.nomoredomainsclub.ru  
-Backend  https://api.mesto.service.nomoredomainsclub.ru  
-
 **«Mesto»** — это веб-сервис, с помощью которого пользователи могут обмениваться фотографиями своих любимых мест (и не только) и оценивать чужие фотографии. Проект был выполнен в рамках серии проектных работ в Яндекс Практикуме по профессии «Веб-разработчик».
 
 ![Сервис Mesto](https://user-images.githubusercontent.com/100028583/215279745-d78add0f-0a8d-4ae2-bd5b-470986666b96.png)
